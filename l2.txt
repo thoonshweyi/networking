@@ -1,0 +1,176 @@
+
+
+=> Request Response Flow
+    https://jsonplaceholder.typicode.com/posts
+
+    1. Browser URL (Uniform Resource Locator)
+    2. DNS (Domain Name Service) IP Address
+    3. Destination IP (Network Connection Setup) TCP service (Transmission Control Protocol)
+    4. HTTPS (Hypertext Transfer Protocol Secure)
+    5. HTTP Request 
+    6. Server Request Process
+    7. HTTP Response
+    8. Show in browser or Use for javascript
+
+
+    # TCP service (Transmission Control Protocol)
+    1. SYN (Synchronize) B tp S = calling (Seq = 100)      (hello ကြားလား)
+    2. SYN-ACK = answering, question (Seq = 300, ACK = 100+1)            (ဟုတ်ကဲ့ကြားပါတယ်ခင်ဗျာ)
+    3. ACK (Acknowledge) B to S = start talking (Seq = 300 + 1)
+
+    # TLS (Transport Layer Security)
+        Base on SSL (Secure Socket Layer)
+
+        1. Client Hello (TLS ver, 1.2,1.3) (Cipher Suite, AES/RSA/GCM) (Random Number) (Session ID)
+        2. Server Hello
+        3. Server Certificate
+        4. Client Key Exchange
+        5. Change Cipher Specification
+        6. Finished (Secure Connection)
+
+        AES = Advanced Encription Standard
+        RSA = Rivest-Shamir-Adleman
+
+---------------------------------------------------------------------
+၁။ SSL Certificate က ဘာလုပ်ပေးတာလဲ (အဓိက လုပ်ဆောင်ချက်များ)
+Data Encryption (အချက်အလက်များကို ကုဒ်ပြောင်းပေးခြင်း): User က ရိုက်ထည့်လိုက်တဲ့ Password များ၊ Credit Card အချက်အလက်များ၊ ကိုယ်ရေးအချက်အလက်များကို လမ်းခုလတ်မှာ Hacker များ ခိုးယူဖတ်ရှုလို့ မရအောင် မသိနိုင်တဲ့ စာလုံးများအဖြစ် ပြောင်းလဲပေးပါတယ်။
+
+Authentication (Website အစစ်အမှန်ဖြစ်ကြောင်း သက်သေပြခြင်း): User ဝင်ရောက်နေသည့် Website သည် အတုမဟုတ်ဘဲ အမှန်တကယ် တရားဝင် စာရင်းသွင်းထားသည့် Website ဖြစ်ကြောင်း သက်သေပြပေးပါတယ်။
+
+Data Integrity (အချက်အလက်များ မပျက်စီးစေခြင်း): Server နဲ့ Browser ကြား အချက်အလက်များ ပေးပို့နေစဉ် လမ်းခုလတ်မှာ ပြင်ဆင်/ဖျက်ဆီးခံရခြင်းမှ ကာကွယ်ပေးပါတယ်။
+
+၂။ SSL Certificate ထဲမှာ ဘာတွေ ပါဝင်သလဲ (What's Inside)
+SSL Certificate တစ်ခုကို ကြည့်ရှုလိုက်ရင် အောက်ပါ အရေးကြီးတဲ့ အချက်အလက်တွေ ပါဝင်နေတာကို တွေ့ရပါလိမ့်မယ် -
+
+ပါဝင်သည့် အချက်အလက်	ရှင်းလင်းချက်
+Domain Name	SSL လက်မှတ် ထုတ်ပေးထားသည့် Website Domain (ဥပမာ- example.com)
+Certificate Holder Info	Website ပိုင်ရှင် သို့မဟုတ် ကုမ္ပဏီ/အဖွဲ့အစည်း၏ အမည်နှင့် အချက်အလက်များ
+Public Key	Data များကို Encrypt ပြုလုပ်ရန် အသုံးပြုသည့် Public Key
+Issuer (CA Info)	SSL Certificate ကို တရားဝင် ထုတ်ပေးခဲ့သည့် Certificate Authority (CA) အမည် (ဥပမာ- Let's Encrypt, DigiCert, Cloudflare)
+Digital Signature	Certificate Authority ရဲ့ ဒစ်ဂျစ်တယ် လက်မှတ် (အတုမဟုတ်ကြောင်း သက်သေ)
+Validity Period	Certificate စတင်အသုံးပြုနိုင်သည့် ရက်စွဲနှင့် သက်တမ်းကုန်ဆုံးမည့် ရက်စွဲ (Issue & Expiry Date)
+Serial Number	လက်မှတ်၏ သီးသန့် အမှတ်စဉ်
+
+
+Server က Certificate ကို Browser ကဘယ်လိုတိုက်ဆိုင်စစ်ဆေးလဲ
+
+Server က ပို့ပေးလိုက်တဲ့ SSL/TLS Certificate ကို Browser က လက်ခံရရှိတဲ့အခါ Chain of Trust (ယုံကြည်မှု ကွင်းဆက်) နဲ့ Public Key Cryptography ကို အသုံးပြုပြီး အဆင့်ဆင့် တိုက်ဆိုင်စစ်ဆေးပါတယ်။
+
+ဒီစစ်ဆေးမှု ဖြစ်စဉ်ကို SSL/TLS Handshake ရဲ့ အရေးပါတဲ့ အစိတ်အအပိုင်းတစ်ခုအဖြစ် အောက်ပါအဆင့်များအတိုင်း လုပ်ဆောင်ပါတယ် -
+
+Browser ရဲ့ Certificate စစ်ဆေးမှု အဆင့်ဆင့်
+1. Browser Client ---- (Request Connection) ---> Web Server
+2. Browser Client <--- (Sends Certificate) ----- Web Server
+3. Browser verification process:
+   [ Authority Check ] -> [ Signature Check ] -> [ Expiry & Revocation Check ] -> [ Domain Check ]
+၁။ Certificate Authority (CA) ၏ ယုံကြည်စိတ်ချရမှု စစ်ဆေးခြင်း
+    Browser တိုင်း (သို့မဟုတ် OS တိုင်း) မှာ တရားဝင် အသိအမှတ်ပြုထားတဲ့ Root Certificates (Root CAs) စာရင်း ပါဝင်တဲ့ Trust Store ရှိပါတယ်။
+
+    Browser က Server ဆီက ရလာတဲ့ Certificate ကို ထုတ်ပေးခဲ့တဲ့ CA (Issuer) ကို ကြည့်ပါတယ်။
+
+    ၎င်း CA သည် Browser ရဲ့ Trust Store ထဲမှာ ပါမပါ၊ သို့မဟုတ် Trust Store ထဲရှိ Root CA က တရားဝင် ထုတ်ပေးထားသည့် Intermediate CA ဟုတ်မဟုတ် Chain of Trust ကို အထက်သို့ ပြန်လိုက်ပြီး စစ်ဆေးပါတယ်။
+
+၂။ Digital Signature (ဒစ်ဂျစ်တယ် လက်မှတ်) ကို စစ်ဆေးခြင်း
+    CA က Certificate ကို ထုတ်ပေးစဉ်က ၎င်း၏ Private Key ကို အသုံးပြုပြီး Digital Signature ရေးထိုးထားတာ ဖြစ်ပါတယ်။
+
+    Browser က ၎င်း၏ Trust Store ထဲတွင် ရှိပြီးသား CA ရဲ့ Public Key ကို အသုံးပြု၍ အဆိုပါ Digital Signature ကို 解密 (Decrypt) လုပ်ပြီး စစ်ဆေးပါတယ်။
+
+    လက်မှတ် မှန်ကန်ပါက Certificate ထဲမှ အချက်အလက်များ လမ်းခုလတ်တွင် ပြင်ဆင်ပြောင်းလဲခံထားရခြင်း မရှိကြောင်း သေချာသွားပါတယ်။
+
+၃။ Domain Name တိုက်ဆိုင်စစ်ဆေးခြင်း (Host Matching)
+    Browser သို့ ရောက်ရှိနေသည့် Domain (ဥပမာ- [www.example.com](https://www.example.com)) နှင့် Certificate ထဲတွင် ဖော်ပြထားသည့် Common Name (CN) သို့မဟုတ် Subject Alternative Name (SAN) တို့ တူညီမှု ရှိမရှိ စစ်ဆေးပါတယ်။
+
+    Subdomain သို့မဟုတ် Domain အမည် မတူညီပါက Browser တွင် "Your connection is not private" (SSL Mismatch Error) ပြသပါလိမ့်မည်။
+
+၄။ သက်တမ်း (Validity Period) စစ်ဆေးခြင်း
+    Certificate ထဲပါရှိသော Not Before (စတင်အသုံးပြုနိုင်သည့်နေ့) နှင့် Not After (သက်တမ်းကုန်မည့်နေ့) ကို လက်ရှိအချိန် (Current System Time) နှင့် တိုက်ဆိုင်စစ်ဆေးပါတယ်။
+
+    သက်တမ်းကုန်ဆုံးနေပါက သို့မဟုတ် စနစ်အချိန် ထိန်းညှိမှု လွဲမှားနေပါက စစ်ဆေးမှု အဆင်မပြေဖြစ်ပါမည်။
+
+၅။ Certificate ပယ်ဖျက်ခံထားရခြင်း ရှိ/မရှိ စစ်ဆေးခြင်း (Revocation Check)
+    Certificate မသက်တမ်းကုန်သေးသော်လည်း Private Key ပေါက်ကြားသွားခြင်း သို့မဟုတ် အကြောင်းတစ်ခုခုကြောင့် CA က ပယ်ဖျက် (Revoke) ထားခြင်း ရှိမရှိကို နည်းလမ်း ၂ မျိုးဖြင့် စစ်ဆေးပါတယ် -
+
+    CRL (Certificate Revocation List): CA ထံမှ ပယ်ဖျက်ထားသော Certificate စာရင်းကို ဒေါင်းလုဒ်ဆွဲ၍ စစ်ဆေးခြင်း။
+
+    OCSP (Online Certificate Status Protocol): CA ရဲ့ Server ထံ တိုက်ရိုက် မေးမြန်း၍ Certificate ရဲ့ လက်ရှိ Status ကို စစ်ဆေးခြင်း (သို့မဟုတ် OCSP Stapling)။
+
+    အဆင့်အားလုံး အောင်မြင်သွားပါက
+    အထက်ပါ စစ်ဆေးမှုများ အားလုံး အောင်မြင်ပါက Browser က Server ရဲ့ Public Key ကို ယုံကြည်စိတ်ချစွာ လက်ခံလိုက်ပြီး asymmetric encryption အသုံးပြု၍ သီးသန့် Session Key တစ်ခုကို ဖန်တီးကာ Server နှင့် လုံခြုံစိတ်ချရသော Encryption Communication (https://) ကို စတင်လိုက်ပါတယ်။
+
+
+
+Public KeyData များကို Encrypt ပြုလုပ်ရန် အသုံးပြုသည့် Public Key
+
+
+
+Server ရဲ့ Keyလား
+
+    ဟုတ်ပါတယ်၊ Server ရဲ့ Public Key ပါပဲ။
+
+    အသေးစိတ် ပြန်လည်ရှင်းပြရရင် SSL/TLS Certificate ထဲမှာ ပါတဲ့ Public Key ဟာ Server ရဲ့ သီးသန့် Key Pair (Public Key + Private Key) အနက်က Public Key ဖြစ်ပါတယ်။
+
+    ဒီ Key နှစ်ခု အလုပ်လုပ်ပုံကို ကြည့်ရင် -
+
+    1. Server မှာ Key နှစ်ခု ရှိပါတယ်
+    Public Key: SSL Certificate ထဲမှာ ပါဝင်ပြီး မည်သူမဆို (Browser အပါအဝင်) ကြည့်ရှု လွတ်လပ်စွာ ယူသုံးလို့ရတဲ့ Key ဖြစ်ပါတယ်။
+
+    Private Key: Server ပေါ်မှာပဲ လျှို့ဝှက်စွာ သိမ်းဆည်းထားပြီး Server ပိုင်ရှင်ကလွဲလို့ မည်သူ့ကိုမျှ မျှဝေခြင်းမရှိတဲ့ Key ဖြစ်ပါတယ်။
+
+    2. Encryption နဲ့ Decryption အလုပ်လုပ်ပုံ (Asymmetric Encryption)
+    asymmetric encryption ရဲ့ သဘောတရားအရ -
+
+    Browser (Client) ဘက်က: Server ရဲ့ Public Key ကို အသုံးပြုပြီး ပေးပို့ချင်တဲ့ အချက်အလက် (Session Key) များကို Encrypt (ကုဒ်ပြောင်း) လိုက်ပါတယ်။
+
+    Server ဘက်က: Encrypt လုပ်ထားတဲ့ အချက်အလက်များ ရောက်လာတဲ့အခါ ၎င်းမှာပဲရှိတဲ့ Private Key ကို အသုံးပြုမှသာ ပြန်ဖြည် (Decrypt) လို့ ရပါတယ်။
+
+    မှတ်ချက်: Public Key နဲ့ Encrypt လုပ်ထားတဲ့ Data ကို Public Key နဲ့ ပြန်ဖြည်လို့ မရပါဘူး။ ၎င်းနှင့် သက်ဆိုင်သည့် Server ရဲ့ Private Key တစ်ခုတည်းဖြင့်သာ ဖြည်လို့ ရတာကြောင့် လမ်းခုလတ်မှာ Hacker က ကြားဖြတ်ယူသွားရင်တောင် Private Key မရှိရင် ဖတ်လို့မရဘဲ လုံခြုံမှု ရှိနေတာ ဖြစ်ပါတယ်။
+
+
+=>Digital Signature ကဘာလဲ
+
+    Digital Signature (ဒစ်ဂျစ်တယ် လက်မှတ်) ဆိုတာ ဒစ်ဂျစ်တယ် စာရွက်စာတမ်းများ (PDF, Emails, Software Code, Transactions) တွင် ပါဝင်သော အချက်အလက်များ၏ မှန်ကန်ကြောင်း အာမခံချက်ပေးသည့် သင်္ကေတ/မက္ကနက်ဇင်း ဖြစ်ပါတယ်။
+
+    လက်တွေ့ကမ္ဘာမှာ စာရွက်ပေါ်မှာ လက်ရေးနဲ့ ထိုးတဲ့ လက်မှတ် (Handwritten Signature) သို့မဟုတ် တံဆိပ်တုံး နှိပ်သလိုမျိုး Digital လောကမှာ စာရွက်စာတမ်းတစ်ခုရဲ့ မူရင်း အစစ်အမှန်ဖြစ်ကြောင်း (Authenticity) နှင့် လမ်းခုလတ်မှာ ပြင်ဆင်ထားခြင်း မရှိကြောင်း (Integrity) ကို သင်္ချာနည်းကျ သက်သေပြပေးတဲ့ နည်းပညာဖြစ်ပါတယ်။
+
+    Digital Signature ဘယ်လိုအလုပ်လုပ်သလဲ (How it Works)
+    Digital Signature ကို Asymmetric Cryptography (Public-Private Key Pair) နှင့် Hashing Technique တို့ကို ပေါင်းစပ်၍ ပြုလုပ်ထားပါသည်။
+
+    1
+    1. Hash Value တွက်ချက်ခြင်း
+    Document Hash Creation
+    လက်မှတ်ထိုးမည့် စာရွက်စာတမ်း (ဥပမာ - PDF) ကို Cryptographic Hash Algorithm (ဥပမာ- SHA-256) အသုံးပြု၍ ပမာဏ ပုံသေရှိသော Hash Value (Digital Fingerprint) အဖြစ် ပြောင်းလဲလိုက်သည်။
+
+    2
+    2. Private Key ဖြင့် Encrypt လုပ်ခြင်း (Signature ဖန်တီးခြင်း)
+    Encryption with Private Key
+    စာရွက်စာတမ်း ထုတ်ပေးသူ (Sender) သည် ထွက်လာသော Hash Value ကို မိမိ၏ Private Key (လျှို့ဝှက်ကီး) ဖြင့် Encrypt လုပ်လိုက်သည်။ ဤ Encrypted Hash ကိုပင် Digital Signature ဟု ခေါ်သည်။
+
+    3
+    3. စာရွက်စာတမ်း နှင့် Signature ပို့ဆောင်ခြင်း
+    Attach Signature & Send
+    Sender သည် မူရင်း စာရွက်စာတမ်း၊ Digital Signature နှင့် မိမိ၏ Public Key (သို့မဟုတ် Digital Certificate) တို့ကို အကူအညီယူ၍ လက်ခံမည့်သူ (Recipient) ထံသို့ ပေးပို့လိုက်သည်။
+
+    4
+    4. Public Key ဖြင့် Verify လုပ်ခြင်း
+    Decryption & Verification
+    Recipient ဘက်မှ စာရွက်စာတမ်း ရရှိသောအခါ -
+
+    Sender ၏ Public Key ကိုသုံး၍ Digital Signature ကို Decrypt လုပ်ကာ Original Hash Value ကို ထုတ်ယူသည်။
+
+    ရရှိလာသော မူရင်း စာရွက်စာတမ်းကို SHA-256 ဖြင့် Hash ထပ်မံတွက်ချက်၍ New Hash Value ရယူသည်။
+
+    Original Hash နှင့် New Hash တူညီပါက စာရွက်စာတမ်းသည် မူရင်းအစစ်ဖြစ်ကြောင်းနှင့် ပြင်ဆင်ထားခြင်း မရှိကြောင်း အတည်ပြုနိုင်သည်။
+
+    Digital Signature ၏ အဓိက အကျိုးကျေးဇူး ၃ ချက်
+    Authenticity (အစစ်အမှန်ဖြစ်ခြင်း): Sender ၏ Private Key ဖြင့်သာ ဖန်တီးနိုင်သောကြောင့် မည်သူက လက်မှတ်ထိုးလိုက်သည်ဆိုသည်ကို အတိအကျ အတည်ပြုနိုင်သည်။
+
+    Integrity (မပျက်စီး/မပြောင်းလဲခြင်း): စာရွက်စာတမ်းထဲမှ စာလုံးတစ်လုံး/အစက်တစ်စက် ပြောင်းလဲသွားသည်နှင့် Hash Value မတူတော့ဘဲ Signature Invalid (မမှန်ကန်ပါ) ဟု ပေါ်မည်ဖြစ်သည်။
+
+    Non-Repudiation (ငြင်းဆန်၍ မရခြင်း): Private Key ကို ပိုင်ရှင်တစ်ဦးတည်းသာ သိရှိနိုင်သောကြောင့် လက်မှတ်ထိုးသူသည် "ငါ ထိုးခဲ့တာ မဟုတ်ပါဘူး" ဟု နောက်မှ ငြင်းဆန်၍ မရပါ။
+
+    Digital Signature နှင့် Electronic Signature (E-Signature) ကွာခြားချက်
+    အချက်	Electronic Signature (E-Signature)	Digital Signature
+    သဘောတရား	စာရွက်ပေါ်တွင် လက်မှတ်ထိုးထားသော ပုံရိပ် (Image) ကို စာရွက်စာတမ်းပေါ် ကူးတင်ခြင်း သို့မဟုတ် Checkbox နှိပ်ခြင်း။	Cryptographic algorithms သုံး၍ သင်္ချာနည်းကျ အတည်ပြုပေးသော နည်းပညာ။
+    လုံခြုံရေး	လုံခြုံရေး အားနည်းပြီး တုပရလွယ်ကူသည်။	လွန်စွာ လုံခြုံစိတ်ချရပြီး တုပ၍ မရနိုင်ပါ။
+    Validation	တင်ထားသော ပုံရိပ် ပြောင်းလဲမှုရှိမရှိ တိုက်ရိုက် စစ်ဆေး၍ မရပါ။	စာရွက်စာတမ်း အနည်းငယ် ပြောင်းလဲသွားပါက Signature ချက်ချင်း ပျက်ပြယ်သည်။
+    အသုံးပြုမှု	ရိုးရှင်းသော သဘောတူညီချက်များ၊ Internal Approvals။	ဘဏ်လုပ်ငန်းများ၊ တရားဝင် စာချုပ်များ၊ Software Code Signing၊ SSL/TLS Certificates။

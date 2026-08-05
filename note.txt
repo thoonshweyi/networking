@@ -1,0 +1,88 @@
+=> Networking Foundation
+
+    => Network ?
+        Computer
+        Phone 
+        Printer
+        Server
+        Router
+            Communicate / Sharing
+    
+    => Resource (Sharing လုပ်ထားတဲ့အရာတွေ)
+        File / Phone
+        Internet Connection
+        Printer 
+        Website
+        Database
+        Voice/Video Call
+
+    =>  Network (သာမန်မိသားစု အင်တာနက်ချိတ်ဆက်ပုံ)
+        Internet > Router (Wifi router)
+        Router -> Laptop
+        Router -> Phone
+        Router -> TV
+
+        (Local Network / LAN)
+
+=>  Network Type ?
+    1. PAN      Personal Area Network       - Phone Blutooth Earphone
+    2. LAN      Local Area Network          - Home/Office/School
+    3. WLAN     Wireless Area Network       - Wifi LAN
+    4. MAN      Metropolitan Area Network   - One City Network
+    5. WAN      Wide Area Network           - Wide LAN Connection
+    6. VPN      Virtual Private Network     - Public Internet
+-----------------------------------------------------
+=> Internet vs Intranet
+    Internet = World Wide Network (Network to Networks)
+    Intranet = Company / Organization (Private Network)
+-----------------------------------------------------
+=> Internet vs World Wide Web
+    Internet x Web
+        Internet
+            World Wide Network (Network Intrastructure)
+
+        Internet ?
+            Web 
+            Email
+            File Transfer
+            Online Game
+            Voice/Video Call
+            Messaging
+            VPN
+
+        World Wide Web
+            Just Service on ineternet . HTTP / HTTPS (website)
+-----------------------------------------------------
+=> Client vs Server
+    Client
+        data / service (serer ဆီမှရယူ)
+        application / device
+
+        Eg. Chrome, Firefox
+            Android/IOS application
+            API, Postman, Bruno, curl
+            Reactjs Web application
+            Backend application
+
+    Server 
+        Client Request
+        Process
+        Response
+
+        Application / Computer
+
+        window 10 
+        window server
+        
+        Daily Process 
+            1. Request
+            2. Input Valication
+            3. Authentication / Authorization
+            4. Business Logic
+            5. Database query
+            6. Response
+
+    Application
+        Cliet / Server
+
+        Node.js API > Reactjs App (Server)
