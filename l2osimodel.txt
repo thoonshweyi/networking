@@ -1,0 +1,20 @@
+=> OSI Model 7 Layers (Open Systems Interconnection, Reference Model)
+
+Layer 7: Application Layer (User/ Application Network Service) HTTP, DNS, SMTP, FTP, DHCP                         
+Layer 6: Presentation Layer (Data format, encrypt, compression) JPEG, JSON
+Layer 5: Session Layer (Communication session)          Session management
+Layer 4: Transport Layer (End to End delivery port)     TCP (Transmission Control Protocol), UDP (User Datagram Protocol)
+Layer 3: Network Layer (IP addressing, routing)         IPv4, IPv6
+Layer 2: Data Link Layer (Local delivery, frame, MAC)   Ethernet, Wifi Router, Switch , ARP (Address Resolution Protocol = convert IP address to MAC address)
+Layer 1: Physical Layer (Signal, Physical Connection)   Ethernet Copper Cable (Cat5, Cat6), RJ45 Connector, Fiber optic cable, radio wave = Wifi, Blutooth, USB, Network Interface Card (NIC)
+           
+10 to 100mbps = cat5 (indoor)
+1Gb = 1000mbps = cat6 (outdoor)
+
+HTTP = Hypertext Transfer Protocol,
+DNS = Domain Name Service,
+SMTP = Simple Mail Transfer Protocol,
+FTP = File Transfer Protocol,
+
+A P S T N D P = All People Seem To Need Data Processing
+P D N T S P A = Please Do Not Throw Sausage Pizza Away

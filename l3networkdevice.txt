@@ -1,0 +1,11 @@
+=> Network Device
+
+    End Device , to connect/way/control/security
+
+    Eg.
+        Desktop/Laptop Computer
+        Smartphone
+        Printer
+        IP Camera
+        Smart TV
+        Speaker
