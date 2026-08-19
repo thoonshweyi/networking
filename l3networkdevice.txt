@@ -1,11 +1,779 @@
 => Network Device
 
     End Device , to connect/way/control/security
+    Frame/Packet 
+
+    End Devices (host)
+
 
     Eg.
         Desktop/Laptop Computer
         Smartphone
         Printer
-        IP Camera
-        Smart TV
-        Speaker
+        IP Camera / NVR (Network Video Recorder)
+        Smart TV / IoT Device (Internet of Things)
+        Speaker 
+        IP Phone
+        Server
+        Network Devices
+
+        NIC (Network Interface Card)
+            NIC types
+                (i) Ethernet NIC = Network Cable 
+                (ii) Wireless NIC = Wi-fi
+                (iii) Fiber NIC = Fiber Optic Cable
+
+            NIC has a unique MAC Address (Media Acces Control) assigned by the manufacture
+
+----
+    #Hub (Layer 1)
+
+        A Hub is an older networking device that connects multiple device together in a single location.
+
+
+        Hot it work?
+            When data arrives on one port, the Hub does not check with device it is meant for Instead if broadcasts the data to all other ports on the device.
+
+            eg: Computer A to Computer C Data sent > Computer B C D E F
+
+            Bandwidth Share
+            Collision
+            Data share to all ports
+            Network slow
+            MAC Address table // မပါဘူး
+            Half-Duplex (ပို့မယ်ဆို လက်ခံလို့မရ၊ လက်ခံမယ်ဆိုပို့မရ)
+
+----
+    #Switch (Intelligence)
+        Connets multiple devices within a Local Area Network (LAN)
+
+            MAC Address Table
+            Full-Duplex
+
+        3 Step Work 
+            (i) Learning
+            (ii) Forwarding
+            (iii) Filtering (Unknown Unicast)
+
+    Switch (Layer 2 Switch)
+      
+    Switch (Layer 3 Switch)
+
+    Switch (Layer 4 Switch)
+
+    Switch (Layer 7 Switch)
+
+
+
+
+
+--------------------------------------------------------------------------
+
+Hub နဲ့ Switch နှစ်ခုလုံးက Network ထဲက Device တွေကို ချိတ်ဆက်ပေးတဲ့ Networking Device တွေပါ။ ဒါပေမယ့် Data ကို ဘယ်လိုပို့သလဲ ဆိုတာက အဓိကကွာခြားချက်ပါ။
+
+1. Hub ဘယ်လိုအလုပ်လုပ်လဲ?
+
+ဥပမာ—
+
+        PC A
+          |
+        [ HUB ]
+       /   |   \
+    PC B  PC C  PC D
+
+PC A က PC C ကို Data ပို့တယ်ဆိုပါစို့။
+
+Hub က ဘယ် Device အတွက် Data ဖြစ်တယ်ဆိုတာ မသိပါဘူး။
+
+ဒါကြောင့် PC A က ပို့လိုက်တဲ့ Frame ကို—
+
+PC A → HUB
+        ↓
+   ┌────┼────┐
+   ↓    ↓    ↓
+ PC B  PC C  PC D
+
+PC B, PC C, PC D အားလုံးဆီကို ပြန်ပို့ပါတယ်။
+
+PC C က ကိုယ့်အတွက် Data ဖြစ်လို့ လက်ခံမယ်။
+PC B နဲ့ PC D ကတော့ ကိုယ့်အတွက်မဟုတ်လို့ ignore လုပ်မယ်။
+
+Hub ရဲ့ အဓိကအချက်
+Layer 1 — Physical Layer မှာ အလုပ်လုပ်တယ်
+MAC Address ကို မလေ့လာ/မသိမ်းဘူး
+Data ရောက်လာရင် Port အားလုံးကို ပြန်ပို့တယ်
+Collision ဖြစ်နိုင်ခြေများတယ်
+ယနေ့ခေတ် Network တွေမှာ မသုံးတော့သလောက်ပါ
+2. Switch ဘယ်လိုအလုပ်လုပ်လဲ?
+
+Switch ကတော့ ဘယ် Device က ဘယ် Port မှာရှိတယ်ဆိုတာ MAC Address နဲ့ မှတ်ထားပါတယ်။
+
+        PC A
+          |
+       [ SWITCH ]
+       /   |   \
+    PC B  PC C  PC D
+
+အစမှာ Switch က MAC Address တွေကို မသိသေးပါဘူး။
+
+PC A က Data ပို့တဲ့အခါ—
+
+PC A
+ ↓
+Switch
+
+Switch က Frame ထဲမှာပါတဲ့ Source MAC Address ကိုကြည့်ပြီး—
+
+MAC Address        Port
+-------------------------
+AA:AA:AA:AA:AA:AA    1
+
+ဆိုပြီး MAC Address Table ထဲမှာ မှတ်ထားပါတယ်။
+
+နောက်ပိုင်း PC A က PC C ကို ပို့တဲ့အခါ Destination MAC ကိုကြည့်ပြီး—
+
+Destination MAC = CC:CC:CC:CC:CC:CC
+
+
+Switch MAC Table
+-------------------------
+AA:AA... → Port 1
+CC:CC... → Port 3
+
+ဆိုတာ သိနေပြီဆိုရင်—
+
+PC A → Switch → PC C
+
+PC C ရှိတဲ့ Port 3 ကိုပဲ ပို့ပါတယ်။
+
+PC B နဲ့ PC D ဆီ မပို့တော့ပါဘူး။
+
+Hub vs Switch
+Feature	Hub	Switch
+OSI Layer	Layer 1	Layer 2
+MAC Address	❌ မသုံး	✅ သုံး
+Data ပို့ပုံ	Port အားလုံး	လိုအပ်တဲ့ Port
+Collision	များ	အလွန်နည်း
+Performance	နည်း	မြန်
+Security	နည်း	ပိုကောင်း
+ယနေ့အသုံးများမှု	❌	✅
+အလွယ်ဆုံးမှတ်ရန်
+
+Hub = "အားလုံးကို ပို့"
+
+A → HUB → B
+         → C
+         → D
+
+Switch = "ဘယ်သူ့ဆီပို့ရမလဲ သိပြီး အဲဒီလူဆီပဲ ပို့"
+
+A → SWITCH → C
+
+ဒါကြောင့် Switch က Hub ထက် ပို intelligent ဖြစ်တယ် လို့ အလွယ်မှတ်နိုင်ပါတယ်။
+
+ပြီးတော့ Router ပါထည့်ပြီး Hub → Switch → Router သုံးခု ဘယ်လိုအလုပ်လုပ်ကြလဲဆိုတာ သိရင် Network အခြေခံက ပိုရှင်းသွားပါလိမ့်မယ်။
+
+Switch  အလုပ်လုပ်ပုံကိုအသေးသစိတ်ပြောပြပါ။
+
+ရပါတယ်။ Switch အလုပ်လုပ်ပုံကို အစကနေ အဆုံးထိ နားလည်အောင် ရှင်းပြပါမယ်။ Network အခြေခံမှာ အရေးကြီးဆုံးအချက်က Switch က MAC Address ကိုအသုံးပြုပြီး Frame ကို သင့်တော်တဲ့ Port ဆီပို့တာ ပါ။
+
+1. Switch ဆိုတာဘာလဲ?
+
+Switch ဆိုတာ LAN ထဲမှာရှိတဲ့ Device တွေကို ချိတ်ဆက်ပေးတဲ့ Layer 2 networking device ဖြစ်ပါတယ်။
+
+ဥပမာ—
+
+PC 1 ─────┐
+PC 2 ─────┤
+PC 3 ─────┤── [ Switch ]
+PC 4 ─────┤
+Printer ──┘
+
+Switch ရဲ့ အဓိကတာဝန်က—
+
+"ဒီ Data ကို ဘယ် Device ဆီ ပို့ရမလဲ?"
+
+ဆိုတာ ဆုံးဖြတ်ပေးတာပါ။
+
+အဲဒီဆုံးဖြတ်ချက်ကို MAC Address နဲ့လုပ်ပါတယ်။
+
+2. Switch က ဘာကို ပို့တာလဲ?
+
+Network မှာ Data တွေကို အဆင့်ဆင့် Encapsulation လုပ်ပြီး ပို့ပါတယ်။
+
+Application data ကနေ—
+
+Data
+ ↓
+Segment
+ ↓
+Packet
+ ↓
+Frame
+ ↓
+Bits
+
+Switch က အဓိကအားဖြင့် Ethernet Frame ကို ကြည့်ပြီး အလုပ်လုပ်ပါတယ်။
+
+ဥပမာ Frame တစ်ခုမှာ—
+
++-------------------------------+
+| Destination MAC               |
++-------------------------------+
+| Source MAC                    |
++-------------------------------+
+| Type / Length                 |
++-------------------------------+
+| Data / Payload                |
++-------------------------------+
+| FCS                           |
++-------------------------------+
+
+အရေးကြီးဆုံးက—
+
+Destination MAC
+Source MAC
+
+ဒီ MAC Address နှစ်ခုကို Switch က အသုံးပြုပါတယ်။
+
+3. Switch မှာ Port တွေရှိတယ်
+
+ဥပမာ 4-port Switch ရှိတယ်ဆိုပါစို့။
+
+             Switch
+       ┌─────────────────┐
+PC A ──┤ Port 1          │
+PC B ──┤ Port 2          │
+PC C ──┤ Port 3          │
+PC D ──┤ Port 4          │
+       └─────────────────┘
+
+Device တစ်ခုချင်းစီမှာ ကိုယ်ပိုင် MAC Address ရှိပါတယ်။
+
+ဥပမာ—
+
+PC A = AA:AA:AA:AA:AA:AA
+PC B = BB:BB:BB:BB:BB:BB
+PC C = CC:CC:CC:CC:CC:CC
+PC D = DD:DD:DD:DD:DD:DD
+
+Switch က အဲဒီ MAC Address တွေကို ဘယ် Port မှာ တွေ့ခဲ့လဲဆိုတာ မှတ်ထားပါတယ်။
+
+4. MAC Address Table
+
+Switch မှာ အရေးကြီးတဲ့ Table တစ်ခုရှိပါတယ်။
+
+အဲဒါကို MAC Address Table လို့ခေါ်ပါတယ်။
+
+ဥပမာ—
+
+MAC Address              Port
+--------------------------------
+AA:AA:AA:AA:AA:AA        1
+BB:BB:BB:BB:BB:BB        2
+CC:CC:CC:CC:CC:CC        3
+DD:DD:DD:DD:DD:DD        4
+
+ဒါကြောင့် Switch က—
+
+CC:CC:CC:CC:CC:CC ဆိုရင် Port 3 မှာရှိတယ်
+
+လို့ သိနေပါတယ်။
+
+5. Switch က MAC Address Table ကို ဘယ်လိုသိတာလဲ?
+
+ဒီနေရာက Switch အလုပ်လုပ်ပုံရဲ့ အရေးကြီးဆုံးအပိုင်းပါ။
+
+Administrator က MAC Address တွေကို တစ်ခုချင်း manually ထည့်ပေးရတာ မဟုတ်ပါဘူး။
+
+Switch က လေ့လာပါတယ်။
+
+ဒါကို MAC Address Learning လို့ခေါ်ပါတယ်။
+
+6. MAC Learning ဖြစ်ပုံ
+
+အစမှာ Switch ရဲ့ Table က Empty ဖြစ်တယ်ဆိုပါစို့။
+
+MAC Address Table
+
+
+MAC Address       Port
+------------------------
+(empty)
+
+PC A က Switch ကို Frame တစ်ခု ပို့လိုက်ပါတယ်။
+
+PC A
+ |
+ | Frame
+ ↓
+Switch
+
+Frame ထဲမှာ—
+
+Source MAC      = AA:AA:AA:AA:AA:AA
+Destination MAC = CC:CC:CC:CC:CC:CC
+
+ပါလာတယ်။
+
+Switch က ပထမဆုံး Source MAC ကိုကြည့်ပါတယ်။
+
+Source MAC = AA:AA:AA:AA:AA:AA
+Incoming Port = 1
+
+ဒါကြောင့် Switch က—
+
+AA:AA:AA:AA:AA:AA → Port 1
+
+ဆိုပြီး မှတ်ထားပါတယ်။
+
+7. Destination MAC ကို ရှာမယ်
+
+အခု Switch က Destination MAC ကိုကြည့်ပါတယ်။
+
+Destination MAC
+= CC:CC:CC:CC:CC:CC
+
+Switch ရဲ့ Table ထဲမှာ—
+
+MAC Address       Port
+------------------------
+AA:AA...           1
+
+ပဲရှိသေးတယ်။
+
+CC:CC... ကို မသိသေးပါဘူး။
+
+ဒါကို Unknown Unicast လို့ခေါ်ပါတယ်။
+
+အဲဒီအချိန် Switch က Frame ကို အခြား Ports အားလုံးဆီ Flood လုပ်ပါတယ်။
+
+                ┌── PC B
+                │
+PC A → Switch ──┼── PC C
+                │
+                └── PC D
+
+PC C က—
+
+"ဒီ Frame ရဲ့ Destination MAC က ငါ့ MAC ပဲ"
+
+ဆိုပြီး လက်ခံပါတယ်။
+
+PC B နဲ့ PC D ကတော့ ကိုယ့် MAC မဟုတ်တဲ့အတွက် မလက်ခံပါဘူး။
+
+8. နောက်တစ်ခါဆို Switch က သိနေပြီ
+
+PC C က ပြန်ဖြေတဲ့အခါ—
+
+Source MAC      = CC:CC:CC:CC:CC:CC
+Destination MAC = AA:AA:AA:AA:AA:AA
+
+ဖြစ်ပါမယ်။
+
+Switch က PC C ရဲ့ Frame ကို Port 3 ကနေ လက်ခံလိုက်တဲ့အတွက်—
+
+CC:CC:CC:CC:CC:CC → Port 3
+
+ဆိုပြီး Table ထဲထည့်ပါတယ်။
+
+အခု Table က—
+
+MAC Address              Port
+--------------------------------
+AA:AA:AA:AA:AA:AA        1
+CC:CC:CC:CC:CC:CC        3
+
+ဖြစ်သွားပါပြီ။
+
+9. အခု PC A → PC C ထပ်ပို့ရင်?
+
+ဒီတစ်ခါ Switch က Destination MAC ကိုကြည့်လိုက်တဲ့အခါ—
+
+Destination MAC
+CC:CC:CC:CC:CC:CC
+
+ဆိုတာ တွေ့ပါတယ်။
+
+Table ကိုကြည့်တယ်—
+
+CC:CC:CC:CC:CC:CC → Port 3
+
+တွေ့ပါတယ်။
+
+ဒါကြောင့်—
+
+PC A
+  ↓
+Port 1
+  ↓
+Switch
+  ↓
+Port 3
+  ↓
+PC C
+
+Port 3 ကိုပဲ ပို့ပါတယ်။
+
+PC B နဲ့ PC D ဆီ မပို့တော့ပါဘူး။
+
+ဒါကို Forwarding လို့ခေါ်ပါတယ်။
+
+10. Switch ရဲ့ အဓိက Process 3 ခု
+
+Switch အလုပ်လုပ်ပုံကို အဓိက 3 ခုပဲ မှတ်ထားရင် အရမ်းလွယ်ပါတယ်။
+
+① Learning
+
+Source MAC ကိုကြည့်ပြီး—
+
+MAC → Port
+
+မှတ်တယ်။
+
+② Forwarding
+
+Destination MAC ကို Table ထဲရှာပြီး—
+
+Destination MAC
+       ↓
+   MAC Table
+       ↓
+   Correct Port
+
+ကို ပို့တယ်။
+
+③ Flooding
+
+Destination MAC ကို မသိရင်—
+
+Unknown Destination
+        ↓
+   Flood
+        ↓
+Other Ports
+
+လုပ်တယ်။
+
+11. Broadcast ဆိုရင် ဘယ်လိုလုပ်လဲ?
+
+ဒါလည်း အရေးကြီးပါတယ်။
+
+Destination MAC က—
+
+FF:FF:FF:FF:FF:FF
+
+ဆိုရင် Broadcast MAC Address ဖြစ်ပါတယ်။
+
+ဥပမာ—
+
+PC A → Switch
+
+PC A က Broadcast Frame ပို့လိုက်ရင်—
+
+             ┌── PC B
+             │
+PC A → Switch ── PC C
+             │
+             └── PC D
+
+Switch က အခြား Ports အားလုံးဆီ ပို့ပါတယ်။
+
+ဒါကြောင့် Switch က "Data အားလုံးကို Port တစ်ခုတည်းဆီပဲ ပို့တယ်" ဆိုတာ မဟုတ်ပါဘူး။
+
+Destination အပေါ်မူတည်ပြီး—
+
+Known Unicast     → Specific Port
+Unknown Unicast   → Flood
+Broadcast         → Flood
+
+ဖြစ်ပါတယ်။
+
+12. Switch က IP Address ကို မသုံးဘူးလား?
+
+ရိုးရိုး Layer 2 Switch အနေနဲ့ဆိုရင် Frame Forwarding အတွက် အဓိကအသုံးပြုတာက MAC Address ပါ။
+
+ဥပမာ—
+
+IP Address
+192.168.1.10
+
+ထက်—
+
+MAC Address
+AA:BB:CC:DD:EE:FF
+
+ကိုကြည့်ပြီး Forward လုပ်ပါတယ်။
+
+ဒါကြောင့်—
+
+Switch → MAC Address
+Router → IP Address
+
+လို့ အခြေခံအားဖြင့် မှတ်ထားနိုင်ပါတယ်။
+
+ဒါပေမယ့် Layer 3 Switch တွေက IP Routing လည်း လုပ်နိုင်ပါတယ်။
+
+13. Switch နဲ့ Router တွဲသုံးပုံ
+
+လက်တွေ့ Network မှာ ဒီလိုတွေ့ရပါတယ်။
+
+                Internet
+                    |
+                 Router
+                    |
+                 Switch
+          ┌─────────┼─────────┐
+          ↓         ↓         ↓
+         PC        PC       Printer
+Switch ရဲ့ တာဝန်
+PC → PC
+PC → Printer
+
+လို တစ်ခုတည်းသော LAN ထဲမှာ Device တွေ ဆက်သွယ်ဖို့ ဖြစ်ပါတယ်။
+
+Router ရဲ့ တာဝန်
+LAN → Internet
+LAN → Another Network
+
+လို Network တစ်ခုကနေ အခြား Network တစ်ခုကို ပို့ဖို့ ဖြစ်ပါတယ်။
+
+14. Full Example
+
+အခု PC A က PC D ကို File တစ်ခု ပို့တယ်ဆိုပါစို့။
+
+PC A
+IP  = 192.168.1.10
+MAC = AA:AA:AA:AA:AA:AA
+
+
+        ↓
+
+
+Switch
+
+
+        ↓
+
+
+PC D
+IP  = 192.168.1.40
+MAC = DD:DD:DD:DD:DD:DD
+
+PC A က Ethernet Frame တည်ဆောက်တဲ့အခါ—
+
+Source MAC
+AA:AA:AA:AA:AA:AA
+
+
+Destination MAC
+DD:DD:DD:DD:DD:DD
+
+ဖြစ်ပါတယ်။
+
+Switch က Frame ရလာတဲ့အခါ—
+
+Step 1 — Source MAC Learning
+AA:AA... → Port 1
+Step 2 — Destination MAC Lookup
+DD:DD...
+
+ကို Table ထဲရှာပါတယ်။
+
+Step 3 — Table မှာရှိရင်
+DD:DD... → Port 4
+
+ဆိုရင်—
+
+Port 1
+  ↓
+Switch
+  ↓
+Port 4
+  ↓
+PC D
+
+ပဲ ပို့ပါတယ်။
+
+15. MAC Table က အမြဲတမ်းမဟုတ်ဘူး
+
+Switch က MAC Address တွေကို အမြဲတမ်း မမှတ်ထားပါဘူး။
+
+MAC Table မှာ Aging Timer ရှိပါတယ်။
+
+ဥပမာ—
+
+MAC Address       Port     Age
+--------------------------------
+AA:AA...           1       20 sec
+CC:CC...           3       10 sec
+DD:DD...           4       5 sec
+
+Device တစ်ခုက အချိန်ကြာကြာ Frame မပို့တော့ရင် Switch က အဲဒီ MAC Entry ကို ဖယ်ရှားနိုင်ပါတယ်။
+
+နောက်တစ်ကြိမ် Frame ပြန်ရောက်လာရင် Switch က ပြန်လေ့လာပါတယ်။
+
+16. Collision ကိုလည်း နားလည်ထားသင့်တယ်
+
+Hub နဲ့ Switch ရဲ့ အရေးကြီးတဲ့ ကွာခြားချက်တစ်ခုက Collision Domain ပါ။
+
+Hub မှာ—
+
+PC A ──┐
+PC B ──┼── HUB
+PC C ──┘
+
+Device တွေက Shared Medium တစ်ခုလို ဖြစ်တာကြောင့် Collision ဖြစ်နိုင်ခြေရှိပါတယ်။
+
+Switch မှာတော့ Port တစ်ခုချင်းစီက သီးခြား Collision Domain ဖြစ်ပါတယ်။
+
+PC A ── Port 1 ┐
+PC B ── Port 2 ├── Switch
+PC C ── Port 3 ┘
+
+အထူးသဖြင့် ယနေ့ခေတ် Full-Duplex Ethernet မှာ Collision ပြဿနာက မရှိသလောက်ဖြစ်ပါတယ်။
+
+အလွယ်ဆုံး မှတ်ရန်
+
+Switch တစ်လုံးရဲ့ အလုပ်လုပ်ပုံကို ဒီ Flow တစ်ခုနဲ့ မှတ်ထားပါ—
+
+        Ethernet Frame ရောက်လာ
+                  ↓
+          Source MAC ကြည့်
+                  ↓
+        MAC Table မှာ မှတ်
+                  ↓
+       Destination MAC ကြည့်
+                  ↓
+        ┌─────────┴─────────┐
+        ↓                   ↓
+     သိတယ်                မသိဘူး
+        ↓                   ↓
+ Correct Port             Flood
+        ↓                   ↓
+     Forward            Other Ports
+
+အဓိကစကားလုံး ၅ ခု ကတော့—
+
+MAC Address → MAC Address Table → Learning → Forwarding → Flooding
+
+ဒီ ၅ ခုကို နားလည်သွားရင် Switch ဘယ်လိုအလုပ်လုပ်လဲဆိုတာ အခြေခံအားဖြင့် ကျွမ်းကျင်သွားပါပြီ။
+
+Switch ရဲ့ အဓိက Process 3 ခု  
+
+Switch ရဲ့ အဓိက Process 3 ခု ကို အလွယ်ဆုံးနဲ့ အသေးစိတ်ပြောရရင်—
+
+1. Learning — MAC Address ကို မှတ်ခြင်း
+
+Switch က Frame ဝင်လာတိုင်း Source MAC Address ကိုကြည့်ပါတယ်။
+
+ဥပမာ PC A က Port 1 ကနေ Frame ပို့လာတယ်—
+
+PC A
+MAC = AA:AA:AA:AA:AA:AA
+        ↓
+     Port 1
+        ↓
+     Switch
+
+Switch က—
+
+AA:AA:AA:AA:AA:AA → Port 1
+
+ဆိုပြီး MAC Address Table ထဲမှာ မှတ်ထားပါတယ်။
+
+ဒါကို MAC Address Learning လို့ခေါ်ပါတယ်။
+
+2. Forwarding — သင့်တော်တဲ့ Port ကို ပို့ခြင်း
+
+Switch က Frame ရဲ့ Destination MAC Address ကိုကြည့်ပါတယ်။
+
+ဥပမာ—
+
+Destination MAC
+= CC:CC:CC:CC:CC:CC
+
+MAC Table ထဲမှာ—
+
+MAC Address              Port
+--------------------------------
+AA:AA:AA:AA:AA:AA        1
+CC:CC:CC:CC:CC:CC        3
+
+လို့ရှိရင် Switch က သိပါတယ်—
+
+CC:CC... က Port 3 မှာရှိတယ်။
+
+ဒါကြောင့်—
+
+PC A
+  ↓
+Port 1
+  ↓
+Switch
+  ↓
+Port 3
+  ↓
+PC C
+
+Port 3 ကိုပဲ ပို့ပါတယ်။
+
+ဒါကို Forwarding လို့ခေါ်ပါတယ်။
+
+3. Flooding — မသိရင် အခြား Port တွေဆီ ပို့ခြင်း
+
+Destination MAC ကို Switch က မသိသေးရင် ဘယ် Port ကိုပို့ရမလဲ မသိပါဘူး။
+
+ဥပမာ—
+
+Destination MAC
+= DD:DD:DD:DD:DD:DD
+
+ဒါပေမယ့် Table ထဲမှာ—
+
+AA:AA... → Port 1
+CC:CC... → Port 3
+
+ပဲရှိတယ်။
+
+DD:DD... မရှိသေးဘူး။
+
+ဒါဆို Switch က—
+
+             ┌── Port 2 → PC B
+             │
+PC A → Switch ├── Port 3 → PC C
+             │
+             └── Port 4 → PC D
+
+လို ဝင်လာတဲ့ Port မဟုတ်တဲ့ အခြား Port တွေဆီ ပို့ပါတယ်။
+
+ဒါကို Flooding လို့ခေါ်ပါတယ်။
+
+အတိုချုပ်
+Process	Switch ဘာလုပ်လဲ?	ဘာကိုကြည့်လဲ?
+Learning	MAC ကို မှတ်	Source MAC
+Forwarding	မှန်တဲ့ Port ကိုပို့	Destination MAC
+Flooding	မသိရင် အခြား Port တွေဆီပို့	Unknown Destination
+မှတ်ရန် Formula
+Source MAC
+    ↓
+LEARN
+    ↓
+Destination MAC
+    ↓
+ ┌──────────────┐
+ │ သိလား?       │
+ └──────┬───────┘
+        │
+   ┌────┴────┐
+   ↓         ↓
+ သိတယ်     မသိဘူး
+   ↓         ↓
+FORWARD    FLOOD
+
+Learning = "ဘယ်သူ ဘယ် Port မှာလဲ?"
+
+Forwarding = "ဒီ Data ကို ဘယ် Port ပို့ရမလဲ?"
+
+Flooding = "ဘယ် Port မှာရှိမှန်းမသိဘူး၊ အခြား Port တွေဆီ ပို့ကြည့်မယ်။"
