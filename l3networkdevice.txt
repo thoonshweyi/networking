@@ -55,13 +55,74 @@
             (ii) Forwarding
             (iii) Filtering (Unknown Unicast)
 
-    Switch (Layer 2 Switch)
+    Switch (Layer 2 Switch) Data Link Layer
+
+	 	Fowards frames based on MAC address (Hardware Address) to determine with port to send data out
+
+        Very fast and cost-effective
+
+        NO VLAN (Virtual LAN) , Cannot read Ipaddress,         ခွဲလို့မရပါ. Port 2-4 192.168.1.10 192.168.1.20
+                                                              Port 5-7 192.168.2.10 192.168.2.20
+        Used is small networks. Access Layer network        အသုံးပြုတဲ့ computer  နဲ့တိုက်ရိုက်ချိတ်ဆက်, တစ်ဆင့်ခံdevice အနေနဲ့ သူ့ရဲ့အပေါ်မှာ advanced device ရှိတယ်။
       
-    Switch (Layer 3 Switch)
+    Switch (Layer 3 Switch) Network Layer
+		can do as Layer 2, Can read IP address, VLAN (Virtual LAN), Router system available (DHCP)
 
-    Switch (Layer 4 Switch)
+		No need Router  (Eliminate the need for router, making routing faster and more efficient)
 
-    Switch (Layer 7 Switch)
+		More expensive than Layer 2 switches and slightly slower due to processing overhead.
+
+		Commonly used in the Core Layer and Distribution Layer of large enterprise networks.
+
+		// ban ip address
+		https://youtube
+		http://youtube
+		youtube
+		facebook
+		gamedowload
+		channelmyanmar
+		18web
+
+    Switch (Layer 4 Switch) Transport Layer
+
+		can do as Layer 2,3 Can read IP address and PORT (HTTP 80, HTTPS 443), QoS (Quality of Service), Load Balancing,VLAN (Virtual LAN), Router system available (DHCP)
+
+		No need Router  (Eliminate the need for router, making routing faster and more efficient)
+
+		More expensive than Layer 2 switches and slightly slower due to processing overhead.
+
+		Commonly used in the Core Layer and Distribution Layer of large enterprise networks, Data Center.
+
+		// ban ip address and port
+		youtube
+		facebook
+		gamedowload
+		channelmyanmar
+		18web
+
+    Switch (Layer 7 Switch) (Application Layer)
+		can do as Layer 2,3 Can read IP address and PORT (HTTP 80, HTTPS 443), QoS (Quality of Service), Load Balancing, Firewal (WAF = Web Application Firewall), Can read User content ,VLAN (Virtual LAN), Router system available (DHCP)
+
+		No need Router  (Eliminate the need for router, making routing faster and more efficient)
+
+		More expensive than Layer 2 switches and slightly slower due to processing overhead.
+
+		Commonly used in the Core Layer and Distribution Layer of large enterprise networks, Data Center.
+
+		fadebook vdo, image, ads blocking
+
+
+    => (i) Unmanaged Switch
+		Layer 2
+       
+    => (ii) Smart Switch (Web)
+		Layer 3
+
+    => (iii) Managed Switch (Web/Console)
+		Layer 4, 7
+
+    => (iv) POE Switch
+
 
 
 
