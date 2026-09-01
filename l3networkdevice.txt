@@ -112,6 +112,33 @@
 		fadebook vdo, image, ads blocking
 
 
+  POE Switch (Power over Ethernet Switch )
+    A PoE Switch is a special type of network switch that can direct both Data and Electric Power (DC) through a single Ethernet (LAN).
+
+    AP (WIFI Access Point)
+    IP Camera
+    IP Phone (Offic desk phone, hotel, hospital)
+
+    #PoE Standard
+    IEEE 802.3af   15.4W
+    IEEE 802.3at (PoE+) 30W
+    IEEE 802.3bt (PoE++) 60W-90W
+
+    IEEE = (Institute of Electrical and Electronic Engineers)
+    802 = LAN/WA networking standards
+    
+    802.3 = Ethernet
+    802.11 = WiFi
+    802.15 = Blutooth
+    802.1 = VLANs
+
+    802 ?
+    80 = 1980
+    2 = Febuary (2nd month)
+
+    **** Check Device PoE support or not?
+    **** Port Watt amount, Switch Watt Budget
+
     => (i) Unmanaged Switch
 		Layer 2
        
@@ -121,8 +148,21 @@
     => (iii) Managed Switch (Web/Console)
 		Layer 4, 7
 
-    => (iv) POE Switch
+    => (iv) POE Switch (Power Over Ethernet Switch)
+--------------------------------------------------------------------------------------------------
+  	#Wireless Access Point
+	-LAN Network နဲ့ချိတ်ဆက်ပေး
 
+	Connet wireless device (like phones, laptops) to a LAN (Local Area Network)
+	It's primary function is to broadcast a Wi-Fi signal for wireless connectivity.
+
+	#Modem / ONT (modulator - demodulator / Optical Network Terminal)
+		Converts and connections to signal between the ISP line and your local network.
+
+    Modem (Analog Signal (phone line, TV cable), Digital Signal (0,1))
+    ONT (converts to Optical Signal (light pulses) => Electrical Signals and sends them to your home router)
+
+--------------------------------------------------------------------------------------------------
 
 
 
